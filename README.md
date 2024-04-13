@@ -1,1 +1,1 @@
-# Survival-in-the-world
+# Survival in the world
