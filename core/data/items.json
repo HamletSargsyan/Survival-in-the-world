@@ -1,1 +1,7 @@
-{}
+{
+    "монета": {
+        "description": "игровая валюта",
+        "can_sell": false,
+        "can_buy": false
+    }
+}
