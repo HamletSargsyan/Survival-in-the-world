@@ -23,19 +23,17 @@ class Item(DictSerializable):
         name: str,
         rarity: ItemRarity,
         desc: str,
+        quantity: int = 0,
         strength: Union[float, None] = None,
         can_equip: bool = False,
         price: Union[int, None] = None,
         craft: Union[List[CraftDict], None] = None,
-        # effects: List[Effect] = [],
-        quantity: int = 0,
     ) -> None:
         self.name = name
         self.strength = strength
         self.rarity = rarity
         self.desc = desc
+        self.quantity = quantity
         self.can_equip = can_equip
         self.price = price
-        # self.effects = effects
         self.craft = craft
-        self.quantity = quantity
