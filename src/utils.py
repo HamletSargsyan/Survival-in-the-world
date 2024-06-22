@@ -41,3 +41,7 @@ def format_list(input_list: list, num_columns: int):
         formatted_lines.append(formatted_line)
 
     return "\n".join(formatted_lines)
+
+
+def calc_xp_for_level(level: int) -> int:
+    return 5 * level + 50 * level + 100

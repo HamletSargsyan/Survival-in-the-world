@@ -3,7 +3,7 @@ from core.storage import Storage
 
 
 class Inventory(Storage):
-    def __init__(self, items: list[Item]) -> None:
+    def __init__(self, items: list[Item] = []) -> None:
         super().__init__("Инвентарь", items, 16)
 
     @property
@@ -13,3 +13,9 @@ class Inventory(Storage):
     @property
     def quick_slots(self) -> list[Item]:
         return list(filter(lambda i: i.location == ItemLocation.QUICK_SLOT, self.items))
+
+    def format_equipped_items(self):
+        return self._format(self.equipped_items)
+
+    def format_quick_slots(self):
+        return self._format(self.quick_slots)
