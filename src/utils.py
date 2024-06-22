@@ -10,7 +10,7 @@ def clear():
 
 def wait_for_keypress():
     print("Нажмите любую клавишу, чтобы продолжить...")
-    
+
     # Сохраняем текущие настройки терминала
     old_settings = termios.tcgetattr(sys.stdin)
     try:

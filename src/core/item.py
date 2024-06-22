@@ -1,15 +1,22 @@
-from enum import Enum
+from enum import Enum, auto
 from typing import List, TypedDict, Union
 
 from core.base import DictSerializable
 
 
 class ItemRarity(Enum):
-    COMMON = "обычный"
-    UNCOMMON = "необычный"
-    RARE = "редкий"
-    EPIC = "эпический"
-    LEGENDARY = "легендарный"
+    COMMON = auto()
+    UNCOMMON = auto()
+    RARE = auto()
+    EPIC = auto()
+    LEGENDARY = auto()
+
+
+class ItemLocation(Enum):
+    GROUND = auto()
+    INVENTORY = auto()
+    EQUIPPED = auto()
+    QUICK_SLOT = auto()
 
 
 class CraftDict(TypedDict):
@@ -28,6 +35,7 @@ class Item(DictSerializable):
         can_equip: bool = False,
         price: Union[int, None] = None,
         craft: Union[List[CraftDict], None] = None,
+        location: ItemLocation = ItemLocation.GROUND,
     ) -> None:
         self.name = name
         self.strength = strength
@@ -37,3 +45,4 @@ class Item(DictSerializable):
         self.can_equip = can_equip
         self.price = price
         self.craft = craft
+        self.location = location
