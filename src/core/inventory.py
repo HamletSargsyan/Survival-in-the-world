@@ -1,17 +1,17 @@
-from core.item import Item, ItemLocation
+from core.item import ItemType, ItemLocation
 from core.storage import Storage
 
 
 class Inventory(Storage):
-    def __init__(self, items: list[Item] = []) -> None:
+    def __init__(self, items: list[ItemType] = []) -> None:
         super().__init__("Инвентарь", items, 16)
 
     @property
-    def equipped_items(self) -> list[Item]:
+    def equipped_items(self) -> list[ItemType]:
         return list(filter(lambda i: i.location == ItemLocation.EQUIPPED, self.items))
 
     @property
-    def quick_slots(self) -> list[Item]:
+    def quick_slots(self) -> list[ItemType]:
         return list(filter(lambda i: i.location == ItemLocation.QUICK_SLOT, self.items))
 
     def format_equipped_items(self):

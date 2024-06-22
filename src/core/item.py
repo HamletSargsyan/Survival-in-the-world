@@ -13,6 +13,7 @@ class ItemRarity(Enum):
 
 
 class ItemLocation(Enum):
+    NONE = auto()
     GROUND = auto()
     INVENTORY = auto()
     EQUIPPED = auto()
@@ -27,6 +28,7 @@ class CraftDict(TypedDict):
 class BaseItem(GameObject):
     def __init__(
         self,
+        *,
         name: str,
         rarity: ItemRarity,
         desc: str,
@@ -34,7 +36,7 @@ class BaseItem(GameObject):
         can_equip: bool = False,
         price: Union[int, None] = None,
         craft: Union[List[CraftDict], None] = None,
-        location: ItemLocation = ItemLocation.GROUND,
+        location: ItemLocation = ItemLocation.NONE,
     ) -> None:
         super().__init__(type=GameObjectType.ITEM)
 
@@ -51,30 +53,7 @@ class BaseItem(GameObject):
 class ItemGroup(BaseItem):
     def __init__(
         self,
-        name: str,
-        rarity: ItemRarity,
-        desc: str,
-        strength: float | None = None,
-        can_equip: bool = False,
-        price: int | None = None,
-        craft: List[CraftDict] | None = None,
-        location: ItemLocation = ItemLocation.GROUND,
-    ) -> None:
-        super().__init__(
-            name=name,
-            rarity=rarity,
-            desc=desc,
-            strength=strength,
-            can_equip=can_equip,
-            price=price,
-            craft=craft,
-            location=location,
-        )
-
-
-class Item(BaseItem):
-    def __init__(
-        self,
+        *,
         name: str,
         rarity: ItemRarity,
         desc: str,
@@ -83,6 +62,33 @@ class Item(BaseItem):
         can_equip: bool = False,
         price: int | None = None,
         craft: List[CraftDict] | None = None,
+        location: ItemLocation = ItemLocation.NONE,
+    ) -> None:
+        super().__init__(
+            name=name,
+            rarity=rarity,
+            desc=desc,
+            strength=strength,
+            can_equip=can_equip,
+            price=price,
+            craft=craft,
+            location=location,
+        )
+        self.type = GameObjectType.ITEM_GROUP
+        self.quantity = quantity
+
+
+class Item(BaseItem):
+    def __init__(
+        self,
+        *,
+        name: str,
+        rarity: ItemRarity,
+        desc: str,
+        strength: float | None = None,
+        can_equip: bool = False,
+        price: int | None = None,
+        craft: List[CraftDict] | None = None,
         location: ItemLocation = ItemLocation.GROUND,
     ) -> None:
         super().__init__(
@@ -96,4 +102,5 @@ class Item(BaseItem):
             location=location,
         )
 
-        self.quantity = quantity
+
+ItemType = Item | ItemGroup
